@@ -1,4 +1,4 @@
-package techy.ap.dbapp;
+package techy.ap.dbapp.Model;
 
 public class Docs {
     private int id;

@@ -10,6 +10,9 @@ import android.widget.EditText;
 import java.util.ArrayList;
 import java.util.List;
 
+import techy.ap.dbapp.Database.Database;
+import techy.ap.dbapp.Model.Docs;
+
 public class MainActivity extends AppCompatActivity {
     private EditText name,spaecialist;
     private Button save,view;

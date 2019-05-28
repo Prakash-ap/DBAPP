@@ -2,6 +2,7 @@ package techy.ap.dbapp;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,13 +12,21 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class ThirdActivity extends AppCompatActivity {
+import techy.ap.dbapp.Database.Database;
+import techy.ap.dbapp.Model.Booking;
+
+public class ThirdActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText name,paname,paphone,date,time;
     private Button book,view_book;
     final Calendar calendar=Calendar.getInstance();
+    Database db;
+    private ArrayList<Booking>bookingArrayList;
+    private Booking booking;
+    private String sname,spaname,spano,sdate,stime;
 
 
     @Override
@@ -30,6 +39,23 @@ public class ThirdActivity extends AppCompatActivity {
         paphone = findViewById(R.id.edt_patno);
         date = findViewById(R.id.edt_date);
         time = findViewById(R.id.edt_time);
+
+        book=findViewById(R.id.booking);
+        view_book=findViewById(R.id.view_booking);
+        db=new Database(this);
+        book.setOnClickListener(this);
+        view_book.setOnClickListener(this);
+
+        Intent intent=getIntent();
+        String docname=intent.getExtras().getString("docsName");
+        name.setText(docname);
+
+
+       /* Bundle bundle=getIntent().getBundleExtra("BUNDLE");
+        ArrayList<Docs>arrayList=(ArrayList<Docs>)bundle.getSerializable("ARRAYLIST");*/
+        /*assert bundle != null;
+        ArrayList<String>docsArrayList=(ArrayList<String>)bundle.getStringArrayList("ArrayList");*/
+
 
         final DatePickerDialog.OnDateSetListener dateformat = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -84,6 +110,35 @@ public class ThirdActivity extends AppCompatActivity {
     }
 
     public void selectTime(View view) {
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.booking:
+                bookingArrayList=new ArrayList<>();
+                Booking booking=new Booking();
+                sname=name.getText().toString();
+                spaname=paname.getText().toString();
+                spano= String.valueOf(Integer.parseInt(paphone.getText().toString()));
+                sdate= String.valueOf(Integer.parseInt(date.getText().toString()));
+                stime= String.valueOf(Integer.parseInt(time.getText().toString()));
+
+                booking.setDocsname(sname);
+                booking.setPatname(spaname);
+                booking.setPhonenumber(Integer.parseInt(spano));
+                booking.setDate(Integer.parseInt(sdate));
+                booking.setTime(Integer.parseInt(stime));
+                bookingArrayList.add(booking);
+                db.insertbookData(booking);
+                break;
+            case R.id.view_booking:
+                startActivity(new Intent(ThirdActivity.this,FourthActivity.class));
+
+
+
+        }
 
     }
 }
