@@ -4,11 +4,11 @@ public class Booking {
     private int id;
     private String docsname;
     private String patname;
-    private int phonenumber;
-    private int date;
-    private int time;
+    private String phonenumber;
+    private String date;
+    private String time;
 
-    public Booking(int id, String docsname, String patname,int phonenumber, int date, int time) {
+    public Booking(int id, String docsname, String patname,String phonenumber, String date, String time) {
         this.id = id;
         this.docsname = docsname;
         this.patname = patname;
@@ -45,27 +45,27 @@ public class Booking {
     }
 
 
-    public int getPhonenumber() {
+    public String getPhonenumber() {
         return phonenumber;
     }
 
-    public void setPhonenumber(int phonenumber) {
+    public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
     }
 
-    public int getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(int date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public int getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(int time) {
+    public void setTime(String time) {
         this.time = time;
     }
 }

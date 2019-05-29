@@ -15,7 +15,9 @@ import techy.ap.dbapp.R;
 public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyViewHolder> {
 
     private ArrayList<Booking>bookingArrayList;
-    private View.OnClickListener onClickListener;
+    private View.OnClickListener mOnItmeClickListener;
+
+
 
     public BookingAdapter(ArrayList<Booking> bookingArrayList) {
         this.bookingArrayList = bookingArrayList;
@@ -31,11 +33,16 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull BookingAdapter.MyViewHolder myViewHolder, int i) {
         Booking booking=bookingArrayList.get(i);
-        booking.setDocsname(booking.getDocsname());
+        myViewHolder.docname.setText(booking.getDocsname());
+        myViewHolder.paname.setText(booking.getPatname());
+        myViewHolder.patphone.setText(booking.getPhonenumber());
+        myViewHolder.date.setText(booking.getDate());
+        myViewHolder.time.setText(booking.getTime());
+       /* booking.setDocsname(booking.getDocsname());
         booking.setPatname(booking.getPatname());
         booking.setPhonenumber(booking.getPhonenumber());
         booking.setDate(booking.getDate());
-        booking.setTime(booking.getTime());
+        booking.setTime(booking.getTime());*/
 
 
     }
@@ -45,10 +52,11 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyViewHo
         return bookingArrayList.size();
     }
 
-    public void setsecondItemClicListener(View.OnClickListener onItemClickListener){
-        onClickListener=onItemClickListener;
-
+    public void setsecondItemClicListener(View.OnClickListener itemClickListener){
+        mOnItmeClickListener=itemClickListener;
     }
+
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView docname,paname,patphone,date,time;
@@ -59,7 +67,8 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyViewHo
             patphone=itemView.findViewById(R.id.patientphone);
             date=itemView.findViewById(R.id.patientdate);
             time=itemView.findViewById(R.id.patienttime);
-            itemView.setOnClickListener(onClickListener);
+            itemView.setTag(this);
+            itemView.setOnClickListener(mOnItmeClickListener);
         }
     }
 }

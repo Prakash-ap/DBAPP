@@ -33,7 +33,7 @@ public class Database  extends SQLiteOpenHelper {
 
 
     private static final String CREATE_TABLE_DOC="CREATE TABLE " +TABLE_NAME+ "("+KEY_ID+ " INTEGER PRIMARY KEY," + KEY_NAME+ " TEXT," +KEY_SPECIALIST+" TEXT"+")";
-    private static final String CREATE_TABLE_BOOK="CREATE TABLE "+TABLE_BOOKING+"("+KEY_ID+ " INTEGER PRIMARY KEY," + KEY_NAME+"TEXT,"+KEY_PATIENT_NAME+" TEXT,"+KEY_PATIENT_NUMBER+" TEXT,"+ KEY_DATE + " TEXT,"+ KEY_TIME+" TEXT"+")";
+    private static final String CREATE_TABLE_BOOK="CREATE TABLE "+TABLE_BOOKING+"("+KEY_ID+ " INTEGER PRIMARY KEY," + KEY_NAME+" TEXT,"+KEY_PATIENT_NAME+" TEXT,"+KEY_PATIENT_NUMBER+" TEXT,"+ KEY_DATE + " TEXT,"+ KEY_TIME+" TEXT"+")";
 
 
 
@@ -105,7 +105,7 @@ public class Database  extends SQLiteOpenHelper {
 
     public ArrayList<Booking>getAllBooking() {
         ArrayList<Booking> bookingArrayList = new ArrayList<>();
-        String selectQuery = " SELECT * FROM " + TABLE_NAME;
+        String selectQuery = " SELECT * FROM " + TABLE_BOOKING;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -115,9 +115,9 @@ public class Database  extends SQLiteOpenHelper {
                 booking.setId(cursor.getInt(cursor.getColumnIndex(KEY_ID)));
                 booking.setDocsname(cursor.getString(cursor.getColumnIndex(KEY_NAME)));
                 booking.setPatname(cursor.getString(cursor.getColumnIndex(KEY_PATIENT_NAME)));
-                booking.setPhonenumber(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_PATIENT_NUMBER))));
-                booking.setDate(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DATE))));
-                booking.setTime(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_TIME))));
+                booking.setPhonenumber((cursor.getString(cursor.getColumnIndex(KEY_PATIENT_NUMBER))));
+                booking.setDate((cursor.getString(cursor.getColumnIndex(KEY_DATE))));
+                booking.setTime((cursor.getString(cursor.getColumnIndex(KEY_TIME))));
                 bookingArrayList.add(booking);
             } while (cursor.moveToNext());
         }

@@ -121,20 +121,21 @@ public class ThirdActivity extends AppCompatActivity implements View.OnClickList
                 Booking booking=new Booking();
                 sname=name.getText().toString();
                 spaname=paname.getText().toString();
-                spano= String.valueOf(Integer.parseInt(paphone.getText().toString()));
-                sdate= String.valueOf(Integer.parseInt(date.getText().toString()));
-                stime= String.valueOf(Integer.parseInt(time.getText().toString()));
+                spano= paphone.getText().toString();
+                sdate= date.getText().toString();
+                stime= time.getText().toString();
 
                 booking.setDocsname(sname);
                 booking.setPatname(spaname);
-                booking.setPhonenumber(Integer.parseInt(spano));
-                booking.setDate(Integer.parseInt(sdate));
-                booking.setTime(Integer.parseInt(stime));
+                booking.setPhonenumber((spano));
+                booking.setDate((sdate));
+                booking.setTime((stime));
                 bookingArrayList.add(booking);
                 db.insertbookData(booking);
                 break;
             case R.id.view_booking:
                 startActivity(new Intent(ThirdActivity.this,FourthActivity.class));
+
 
 
 
